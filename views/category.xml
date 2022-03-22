@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="ebook_category_tree">
+        <field name="name">Ebook category tree view</field>
+        <field name="model">ebook.category</field>
+        <field name="arch" type="xml">
+            <tree string="eBook category list" default_order="name" create='true' edit='true' editable="bottom">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="ebook_category_actions" model="ir.actions.act_window">
+        <field name="name">eBook category action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">ebook.category</field>
+        <field name="view_id" ref="ebook_category_tree"/>
+        <field name="view_ids" eval="[(5, 0, 0),(0, 0, {'view_mode': 'tree', 'view_id': ref('ebook_category_tree')})]"/>
+    </record>
+</odoo>

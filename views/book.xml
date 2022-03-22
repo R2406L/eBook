@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="ebook_book_tree">
+        <field name="name">Books tree view</field>
+        <field name="model">ebook.book</field>
+        <field name="arch" type="xml">
+            <tree string="Book list" default_order="name" create='true' edit='true'>
+                <field name="name"/>
+		<field name="author_ids" widget="many2many_tags"/>
+		<field name="category_ids" widget="many2many_tags"/>
+		<field name="country_id"/>
+                <field name="year"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="ebook_book_form">
+        <field name="name">Book form view</field>
+        <field name="model">ebook.book</field>
+        <field name="arch" type="xml">
+	    <form string="Book" create="true" edit="true">
+                <style>
+                    .ebook-img > img { height: 400px; }
+                </style>
+		<sheet>
+		    <group>
+			<group string="Characteristics">
+			    <field name="name"/>
+			    <field name="local_name"/>
+			    <field name="original_name"/>
+			    <field name="country_id"/>
+			    <field name="year"/>
+			    <field name="pages"/>
+			    <field name="author_ids" widget="many2many_tags"/>
+			    <field name="category_ids" widget="many2many_tags"/>
+			</group>
+			<group string="Illustration">
+			    <field name="image" class="ebook-img" widget="image" nolabel="1"/>
+			</group>
+		    </group>
+		    <notebook>
+			<page string="Description">
+			    <field name="description" widget="html"/>
+			</page>
+			<page string="Files">
+			    <field name="files" widget="many2many_binary"/>
+			</page>
+		    </notebook>
+		</sheet>
+    	    </form>
+
+        </field>
+    </record>
+
+    <record id="ebook_book_search_view" model="ir.ui.view">
+        <field name="name">eBook book search</field>
+        <field name="model">ebook.book</field>
+        <field name="arch" type="xml">
+            <search string="Book search">
+                <field name="name"/>
+                <field name="author_ids"/>
+                <searchpanel>
+                    <field name="category_ids" icon="fa-folder" select="multi"/>
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+
+    <record id="ebook_book_actions" model="ir.actions.act_window">
+        <field name="name">Book action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">ebook.book</field>
+        <field name="view_id" ref="ebook_book_tree"/>
+        <field name="view_ids" eval="[(5, 0, 0),
+                                        (0, 0, {'view_mode': 'tree', 'view_id': ref('ebook_book_tree')}),
+                                        (0, 0, {'view_mode': 'form', 'view_id': ref('ebook_book_form')})]"/>
+    </record>
+</odoo>

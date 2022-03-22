@@ -1,0 +1,24 @@
+<odoo>
+    <record model="ir.module.category" id="ebook_management">
+        <field name="name">Library management</field>
+        <field name="description">Access to library management</field>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="ebook_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="category_id" ref="ebook_management"/>
+    </record>
+
+    <record id="ebook_publisher" model="res.groups">
+        <field name="name">Publisher</field>
+        <field name="category_id" ref="ebook_management"/>
+	<field name="implied_ids" eval="[(4, ref('ebook_user'))]"/>
+    </record>
+
+    <record id="ebook_administrator" model="res.groups">
+        <field name="name">Administrator</field>
+        <field name="category_id" ref="ebook_management"/>
+	<field name="implied_ids" eval="[(4, ref('ebook_publisher'))]"/>
+    </record>
+</odoo>
