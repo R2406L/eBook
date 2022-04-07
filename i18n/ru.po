@@ -172,11 +172,6 @@ msgid "Page count"
 msgstr "Количество страниц"
 
 #. module: ebook
-#: model:ir.model.fields,field_description:ebook.field_ebook_book__year
-msgid "Year of publish"
-msgstr "Год публикации"
-
-#. module: ebook
 #: model:res.groups,name:ebook.ebook_publisher
 msgid "Publisher"
 msgstr "Публикатор"
@@ -199,7 +194,12 @@ msgstr "Пользователь"
 #. module: ebook
 #: model:ir.model.fields,field_description:ebook.field_ebook_book__year
 msgid "Year of publish"
-msgstr ""
+msgstr "Год публикации"
+
+#. module: ebook
+#: model:ir.model.fields,field_description:ebook.field_ebook_book__formats
+msgid "File formats"
+msgstr "Форматы файлов"
 
 #. module: ebook
 #: model:ir.actions.act_window,name:ebook.ebook_category_actions

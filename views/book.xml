@@ -10,6 +10,9 @@
 		<field name="category_ids" widget="many2many_tags"/>
 		<field name="country_id"/>
                 <field name="year"/>
+                <field name="pages"/>
+                <field name="formats"/>
+		<field name="create_uid"/>
             </tree>
         </field>
     </record>
@@ -59,7 +62,7 @@
             <search string="Book search">
                 <field name="name"/>
                 <field name="author_ids"/>
-                <searchpanel>
+		<searchpanel>
                     <field name="category_ids" icon="fa-folder" select="multi"/>
                 </searchpanel>
             </search>
