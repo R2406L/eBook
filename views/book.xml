@@ -6,6 +6,7 @@
         <field name="arch" type="xml">
             <tree string="Book list" default_order="name" create='true' edit='true'>
                 <field name="name"/>
+                <field name="isbn"/>
 		<field name="author_ids" widget="many2many_tags"/>
 		<field name="category_ids" widget="many2many_tags"/>
 		<field name="country_id"/>
@@ -14,6 +15,41 @@
                 <field name="formats"/>
 		<field name="create_uid"/>
             </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="ebook_book_kanban">
+        <field name="name">Books kanban view</field>
+        <field name="model">ebook.book</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="id"/>
+                <field name="name"/>
+                <field name="image"/>
+		<field name="author_ids"/>
+		<field name="category_ids"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="o_kanban_image">
+                                            <img t-att-src="kanban_image('ebook.book','image',record.id.raw_value)"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <strong><field name="name"/></strong><br/>
+					<field name="author_ids"/>
+					<hr/>
+					<field name="category_ids"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
         </field>
     </record>
 
@@ -36,6 +72,7 @@
 			    <field name="pages"/>
 			    <field name="author_ids" widget="many2many_tags"/>
 			    <field name="category_ids" widget="many2many_tags"/>
+			    <field name="isbn"/>
 			</group>
 			<group string="Illustration">
 			    <field name="image" class="ebook-img" widget="image" nolabel="1"/>
@@ -49,6 +86,10 @@
 			    <field name="files" widget="many2many_binary"/>
 			</page>
 		    </notebook>
+		    <div class="oe_chatter">
+			<field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+			<field name="message_ids" widget="mail_thread"/>
+		    </div>
 		</sheet>
     	    </form>
 
@@ -62,6 +103,7 @@
             <search string="Book search">
                 <field name="name"/>
                 <field name="author_ids"/>
+                <field name="isbn"/>
 		<searchpanel>
                     <field name="category_ids" icon="fa-folder" select="multi"/>
                 </searchpanel>
@@ -75,6 +117,7 @@
         <field name="res_model">ebook.book</field>
         <field name="view_id" ref="ebook_book_tree"/>
         <field name="view_ids" eval="[(5, 0, 0),
+					(0, 0, {'view_mode': 'kanban', 'view_id': ref('ebook_book_kanban')}),
                                         (0, 0, {'view_mode': 'tree', 'view_id': ref('ebook_book_tree')}),
                                         (0, 0, {'view_mode': 'form', 'view_id': ref('ebook_book_form')})]"/>
     </record>

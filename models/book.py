@@ -5,6 +5,7 @@ import os
 
 class Book(models.Model):
     _name = 'ebook.book'
+    _inherit = 'mail.thread'
     _description = 'Book model definition'
 
     id = fields.Integer('ID')
@@ -20,6 +21,7 @@ class Book(models.Model):
     pages = fields.Integer('Page count')
     year = fields.Char('Year of publish',size=4)
     formats = fields.Char('File formats', compute='_get_formats')
+    isbn = fields.Char('ISBN')
 
     @api.depends('local_name','original_name')
     def _get_name(self):
