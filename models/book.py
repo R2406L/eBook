@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from odoo import fields, models, api
-import os
+from PIL import Image
+from odoo.tools import config
+import os, logging, fitz, io, base64, subprocess, time
+
+_logger = logging.getLogger(__name__)
 
 class Book(models.Model):
     _name = 'ebook.book'
@@ -15,12 +19,11 @@ class Book(models.Model):
     country_id = fields.Many2one('res.country',string='Country')
     author_ids = fields.Many2many('res.partner',string='Authors')
     category_ids = fields.Many2many('ebook.category',string='Categories')
-    files = fields.Many2many('ir.attachment',string='Files')
+    attachment_id = fields.Binary(string='File')
     image = fields.Binary('Illustration')
     description = fields.Text('Short description')
     pages = fields.Integer('Page count')
     year = fields.Char('Year of publish',size=4)
-    formats = fields.Char('File formats', compute='_get_formats')
     isbn = fields.Char('ISBN')
 
     @api.depends('local_name','original_name')
@@ -31,11 +34,21 @@ class Book(models.Model):
             else:
                 s.name = s.local_name
 
-    @api.depends('files')
-    def _get_formats(self):
-        for s in self:
-            fs = []
-            for f in s.files:
-                file_extension = os.path.splitext(f.name)[1]
-                fs.append(file_extension)
-            s.formats = ','.join(fs)
+    def get_preview(self):
+        path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        filename = str(int(time.time()))
+        dst_file = "%s/temp/thumb_%s.jpg" % (path, filename)
+        src_file = "%s/temp/orig_%s.pdf" % (path, filename)
+
+        file_content = base64.b64decode(self.attachment_id)
+        with open(src_file, "wb+") as f:
+            f.write(file_content)
+            f.close()
+
+        params = 'convert %s[0] -density 300 -resize 500x500^ %s' % (src_file, dst_file)
+        subprocess.call(params, shell=True)
+        if os.path.isfile(dst_file):
+            with open(dst_file, "rb") as image_file:
+                self.image = base64.b64encode(image_file.read())
+            os.unlink(dst_file)
+        os.unlink(src_file)

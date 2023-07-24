@@ -12,7 +12,6 @@
 		<field name="country_id"/>
                 <field name="year"/>
                 <field name="pages"/>
-                <field name="formats"/>
 		<field name="create_uid"/>
             </tree>
         </field>
@@ -59,11 +58,22 @@
         <field name="arch" type="xml">
 	    <form string="Book" create="true" edit="true">
                 <style>
-                    .ebook-img > img { height: 400px; }
+                    .ebook-img img { max-height: 300px; max-width: 200px; }
+		    .o_field_widget.o_field_pdf_viewer .o_pdfview_iframe {
+			width: 100% !important;
+			min-height: 600px;
+			height: auto;
+			border: 0;
+			margin-top: 10px;
+		    }
                 </style>
+                <header>
+                    <button name="get_preview" type="object" string="Create preview" class="oe_highlight"/>
+                </header>
 		<sheet>
 		    <group>
 			<group string="Characteristics">
+			    <field name="image" class="ebook-img" widget="image"/>
 			    <field name="name"/>
 			    <field name="local_name"/>
 			    <field name="original_name"/>
@@ -74,16 +84,15 @@
 			    <field name="category_ids" widget="many2many_tags"/>
 			    <field name="isbn"/>
 			</group>
-			<group string="Illustration">
-			    <field name="image" class="ebook-img" widget="image" nolabel="1"/>
-			</group>
+			<!-- group string="Attachment" col="1" -->
+			<div class="oe_row">
+			    <field name="attachment_id" class="oe_inline" widget="pdf_viewer" nolabel="1"/>
+			</div>
+			<!-- /group -->
 		    </group>
 		    <notebook>
 			<page string="Description">
 			    <field name="description" widget="html"/>
-			</page>
-			<page string="Files">
-			    <field name="files" widget="many2many_binary"/>
 			</page>
 		    </notebook>
 		    <div class="oe_chatter">
