@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="s_ebook_public" name="Elecronic books">
+        <section class="container s_ebook_public">
+            <div class="row">
+                <div class="col-md-12 s_ebook_main">
+                    <h3>Доступные материалы</h3>
+                    <div class="d-flex flex-row">
+                        <div id="ebook-filter" class="col-md-2 d-flex flex-column ebook_filter">
+                            <h5>Фильтр</h5>
+                            <div id="ebook-tags" class="d-flex flex-row flex-wrap w-100 ebook_tags"></div>
+                        </div>
+                        <div id="ebook-content" class="col-md-10 d-flex flex-row w-100 ebook_content"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="ebook_snippet_options" inherit_id="website.snippet_options" name="ebook public options">
+        <xpath expr="." position="inside">
+            <div data-js="EBookOptions" data-page-options="true" data-selector=".s_ebook_public">
+                <we-input
+                    string="Categories"
+                    data-name="ebook_limit_opt"
+                    data-attribute-name="categories"
+                    data-apply-to=".s_ebook_main"
+                    data-select-data-attribute=""
+                    t-att-data-unit=""
+                />
+                <we-input
+                    string="Suggestions"
+                    data-name="ebook_limit_opt"
+                    data-attribute-name="limit"
+                    data-apply-to=".s_ebook_main"
+                    data-select-data-attribute=""
+                    t-att-data-unit="unit"
+                />
+            </div>
+        </xpath>
+        <xpath expr="//*[@t-set='so_content_addition_selector']" position="inside">, .s_ebook_public</xpath>
+    </template>
+
+    <template id="external_snippets" inherit_id="website.snippets" priority="8">
+        <xpath expr="//div[@id='snippet_effect']/div[hasclass('o_panel_body')]" position="inside">
+            <t t-snippet="ebook.s_ebook_public" string="Books" t-thumbnail="/ebook/static/description/icon.png"/>
+        </xpath>
+    </template>
+
+</odoo>

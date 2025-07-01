@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="ebook_tags_tree">
+        <field name="name">Ebook tags tree view</field>
+        <field name="model">ebook.tags</field>
+        <field name="arch" type="xml">
+            <tree string="eBook tags list" default_order="name" create='true' edit='true' editable="bottom">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="ebook_tags_actions" model="ir.actions.act_window">
+        <field name="name">eBook tags action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">ebook.tags</field>
+        <field name="view_id" ref="ebook_tags_tree"/>
+        <field name="view_ids" eval="[(5, 0, 0),(0, 0, {'view_mode': 'tree', 'view_id': ref('ebook_tags_tree')})]"/>
+    </record>
+</odoo>

@@ -14,12 +14,29 @@
     'installable': True,
     'application': True,
 
-    'data': [
-	'security/groups.xml',
-	'security/ir.model.access.csv',
+    'assets': {
+        'web.assets_frontend': [
+            'ebook/static/src/snippets/s_ebook_public/000.xml',
+            'ebook/static/src/snippets/s_ebook_public/001.xml',
+            'ebook/static/src/snippets/s_ebook_public/000.js',
+            'ebook/static/src/snippets/s_ebook_public/000.scss',
+            'ebook/static/src/snippets/s_ebook_public/001.scss',
+        ],
+	},
 
-	'views/book.xml',
-	'views/category.xml',
-	'views/_menu.xml',
+    'data': [
+        'security/groups.xml',
+        'security/ir.model.access.csv',
+
+        'views/book.xml',
+        'views/category.xml',
+        'views/tags.xml',
+        'views/public_tags.xml',
+        'views/_menu.xml',
+
+        'views/snippets/books.xml',
+
+        'views/portal/ebook_list.xml',
+        'views/portal/ebook_menu.xml',
     ],
 }

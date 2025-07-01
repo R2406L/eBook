@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0-20220321\n"
+"Project-Id-Version: Odoo Server 16.0-20230527\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-22 06:35+0000\n"
-"PO-Revision-Date: 2022-03-22 06:35+0000\n"
+"POT-Creation-Date: 2025-02-16 15:10+0000\n"
+"PO-Revision-Date: 2025-02-16 15:10+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,14 +16,29 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: ebook
+#: model_terms:ir.ui.view,arch_db:ebook.ebook_snippet_options
+msgid ", .s_ebook_public"
+msgstr ""
+
+#. module: ebook
 #: model:ir.module.category,description:ebook.ebook_management
 msgid "Access to library management"
 msgstr "Доступ к управлению библиотекой"
 
 #. module: ebook
+#: model:ir.model.fields,field_description:ebook.field_ebook_book__message_needaction
+msgid "Action Needed"
+msgstr "Необходимые действия"
+
+#. module: ebook
 #: model:res.groups,name:ebook.ebook_administrator
 msgid "Administrator"
 msgstr "Администратор"
+
+#. module: ebook
+#: model:ir.model.fields,field_description:ebook.field_ebook_book__message_attachment_count
+msgid "Attachment Count"
+msgstr "Количество вложений"
 
 #. module: ebook
 #: model:ir.model.fields,field_description:ebook.field_ebook_book__author_ids
@@ -56,18 +71,32 @@ msgid "Book model definition"
 msgstr "Модель книги"
 
 #. module: ebook
+#: model:ir.model,name:ebook.model_ebook_public_tags
+msgid "Book public tags model definition"
+msgstr "Определение модели публичных тегов"
+
+#. module: ebook
 #: model_terms:ir.ui.view,arch_db:ebook.ebook_book_search_view
 msgid "Book search"
 msgstr "Поиск книг"
 
 #. module: ebook
+#: model:ir.model,name:ebook.model_ebook_tags
+msgid "Book tags model definition"
+msgstr "Описание модели тегов"
+
+#. module: ebook
 #: model:ir.ui.menu,name:ebook.ebook_book_menu
+#: model_terms:ir.ui.view,arch_db:ebook.external_snippets
+#: model_terms:ir.ui.view,arch_db:ebook.portal_my_ebooks
+#: model_terms:ir.ui.view,arch_db:ebook.portal_my_ebooks_menu
 msgid "Books"
 msgstr "Книги"
 
 #. module: ebook
 #: model:ir.model.fields,field_description:ebook.field_ebook_book__category_ids
 #: model:ir.ui.menu,name:ebook.ebook_category_menu
+#: model_terms:ir.ui.view,arch_db:ebook.ebook_snippet_options
 msgid "Categories"
 msgstr "Категории"
 
@@ -82,14 +111,23 @@ msgid "Country"
 msgstr "Страна"
 
 #. module: ebook
+#: model_terms:ir.ui.view,arch_db:ebook.ebook_book_form
+msgid "Create preview"
+msgstr "Создать обложку книги"
+
+#. module: ebook
 #: model:ir.model.fields,field_description:ebook.field_ebook_book__create_uid
 #: model:ir.model.fields,field_description:ebook.field_ebook_category__create_uid
+#: model:ir.model.fields,field_description:ebook.field_ebook_public_tags__create_uid
+#: model:ir.model.fields,field_description:ebook.field_ebook_tags__create_uid
 msgid "Created by"
 msgstr "Создано"
 
 #. module: ebook
 #: model:ir.model.fields,field_description:ebook.field_ebook_book__create_date
 #: model:ir.model.fields,field_description:ebook.field_ebook_category__create_date
+#: model:ir.model.fields,field_description:ebook.field_ebook_public_tags__create_date
+#: model:ir.model.fields,field_description:ebook.field_ebook_tags__create_date
 msgid "Created on"
 msgstr "Создано"
 
@@ -101,42 +139,90 @@ msgstr "Описание"
 #. module: ebook
 #: model:ir.model.fields,field_description:ebook.field_ebook_book__display_name
 #: model:ir.model.fields,field_description:ebook.field_ebook_category__display_name
+#: model:ir.model.fields,field_description:ebook.field_ebook_public_tags__display_name
+#: model:ir.model.fields,field_description:ebook.field_ebook_tags__display_name
 msgid "Display Name"
 msgstr "Название"
 
 #. module: ebook
-#: model:ir.model.fields,field_description:ebook.field_ebook_book__files
-#: model_terms:ir.ui.view,arch_db:ebook.ebook_book_form
-msgid "Files"
-msgstr "Файлы"
+#: model:ir.model.fields,field_description:ebook.field_ebook_book__attachment_id
+msgid "File"
+msgstr "Вложение"
+
+#. module: ebook
+#: model:ir.model.fields,field_description:ebook.field_ebook_book__message_follower_ids
+msgid "Followers"
+msgstr "Подписчики"
+
+#. module: ebook
+#: model:ir.model.fields,field_description:ebook.field_ebook_book__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Подписчики (Контакты)"
+
+#. module: ebook
+#: model:ir.model.fields,field_description:ebook.field_ebook_book__has_message
+msgid "Has Message"
+msgstr "Есть сообщения"
 
 #. module: ebook
 #: model:ir.model.fields,field_description:ebook.field_ebook_book__id
 #: model:ir.model.fields,field_description:ebook.field_ebook_category__id
+#: model:ir.model.fields,field_description:ebook.field_ebook_public_tags__id
+#: model:ir.model.fields,field_description:ebook.field_ebook_tags__id
 msgid "ID"
 msgstr "№"
 
 #. module: ebook
+#: model:ir.model.fields,field_description:ebook.field_ebook_book__isbn
+msgid "ISBN"
+msgstr "ISBN каталожный номер"
+
+#. module: ebook
+#: model:ir.model.fields,help:ebook.field_ebook_book__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Если выбрано, новые сообщения требуют ваших действий"
+
+#. module: ebook
+#: model:ir.model.fields,help:ebook.field_ebook_book__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Если выбрано, некоторые сообщения имеют ошибки при доставке"
+
+#. module: ebook
 #: model:ir.model.fields,field_description:ebook.field_ebook_book__image
-#: model_terms:ir.ui.view,arch_db:ebook.ebook_book_form
 msgid "Illustration"
 msgstr "Иллюстрация"
 
 #. module: ebook
+#: model:ir.model.fields,field_description:ebook.field_ebook_book__message_is_follower
+msgid "Is Follower"
+msgstr "Подписчик"
+
+#. module: ebook
+#: model:ir.model.fields,field_description:ebook.field_ebook_book__is_public
+msgid "Is public access"
+msgstr "Показывать на сайте"
+
+#. module: ebook
 #: model:ir.model.fields,field_description:ebook.field_ebook_book____last_update
 #: model:ir.model.fields,field_description:ebook.field_ebook_category____last_update
+#: model:ir.model.fields,field_description:ebook.field_ebook_public_tags____last_update
+#: model:ir.model.fields,field_description:ebook.field_ebook_tags____last_update
 msgid "Last Modified on"
 msgstr "Последнее изменение"
 
 #. module: ebook
 #: model:ir.model.fields,field_description:ebook.field_ebook_book__write_uid
 #: model:ir.model.fields,field_description:ebook.field_ebook_category__write_uid
+#: model:ir.model.fields,field_description:ebook.field_ebook_public_tags__write_uid
+#: model:ir.model.fields,field_description:ebook.field_ebook_tags__write_uid
 msgid "Last Updated by"
 msgstr "Последнее обновление"
 
 #. module: ebook
 #: model:ir.model.fields,field_description:ebook.field_ebook_book__write_date
 #: model:ir.model.fields,field_description:ebook.field_ebook_category__write_date
+#: model:ir.model.fields,field_description:ebook.field_ebook_public_tags__write_date
+#: model:ir.model.fields,field_description:ebook.field_ebook_tags__write_date
 msgid "Last Updated on"
 msgstr "Последнее обновление"
 
@@ -156,10 +242,52 @@ msgid "Local name"
 msgstr "Переведенное название"
 
 #. module: ebook
+#: model:ir.model.fields,field_description:ebook.field_ebook_book__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "Вложение"
+
+#. module: ebook
+#: model:ir.ui.menu,name:ebook.ebook_management_menu
+msgid "Management"
+msgstr "Управление"
+
+#. module: ebook
+#: model:ir.model.fields,field_description:ebook.field_ebook_book__message_has_error
+msgid "Message Delivery error"
+msgstr "Ошибка доставки"
+
+#. module: ebook
+#: model:ir.model.fields,field_description:ebook.field_ebook_book__message_ids
+msgid "Messages"
+msgstr "Сообщения"
+
+#. module: ebook
 #: model:ir.model.fields,field_description:ebook.field_ebook_book__name
 #: model:ir.model.fields,field_description:ebook.field_ebook_category__name
+#: model:ir.model.fields,field_description:ebook.field_ebook_public_tags__name
+#: model:ir.model.fields,field_description:ebook.field_ebook_tags__name
 msgid "Name"
 msgstr "Название"
+
+#. module: ebook
+#: model:ir.model.fields,field_description:ebook.field_ebook_book__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Количество действий"
+
+#. module: ebook
+#: model:ir.model.fields,field_description:ebook.field_ebook_book__message_has_error_counter
+msgid "Number of errors"
+msgstr "Количество ошибок"
+
+#. module: ebook
+#: model:ir.model.fields,help:ebook.field_ebook_book__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Количество сообщений требующих ваших действий"
+
+#. module: ebook
+#: model:ir.model.fields,help:ebook.field_ebook_book__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Количество сообщений с ошибкой доставки"
 
 #. module: ebook
 #: model:ir.model.fields,field_description:ebook.field_ebook_book__original_name
@@ -170,6 +298,18 @@ msgstr "Оригинальное название"
 #: model:ir.model.fields,field_description:ebook.field_ebook_book__pages
 msgid "Page count"
 msgstr "Количество страниц"
+
+#. module: ebook
+#: model_terms:ir.ui.view,arch_db:ebook.ebook_book_form
+#: model_terms:ir.ui.view,arch_db:ebook.ebook_book_kanban
+msgid "Preview"
+msgstr "Иллюстрация"
+
+#. module: ebook
+#: model:ir.model.fields,field_description:ebook.field_ebook_book__public_tags_ids
+#: model:ir.ui.menu,name:ebook.ebook_public_tags_menu
+msgid "Public tags"
+msgstr "Теги для сайта"
 
 #. module: ebook
 #: model:res.groups,name:ebook.ebook_publisher
@@ -183,8 +323,25 @@ msgstr "Настройки"
 
 #. module: ebook
 #: model:ir.model.fields,field_description:ebook.field_ebook_book__description
+#: model:ir.model.fields,field_description:ebook.field_ebook_book__short_description
 msgid "Short description"
 msgstr "Краткое описание"
+
+#. module: ebook
+#: model_terms:ir.ui.view,arch_db:ebook.ebook_snippet_options
+msgid "Suggestions"
+msgstr "Предложения"
+
+#. module: ebook
+#: model:ir.model.fields,field_description:ebook.field_ebook_book__tags_ids
+#: model:ir.ui.menu,name:ebook.ebook_tags_menu
+msgid "Tags"
+msgstr "Теги"
+
+#. module: ebook
+#: model_terms:ir.ui.view,arch_db:ebook.portal_my_ebooks
+msgid "There are currently no books for your account."
+msgstr "В данный момент книги отсутствуют"
 
 #. module: ebook
 #: model:res.groups,name:ebook.ebook_user
@@ -197,11 +354,6 @@ msgid "Year of publish"
 msgstr "Год публикации"
 
 #. module: ebook
-#: model:ir.model.fields,field_description:ebook.field_ebook_book__formats
-msgid "File formats"
-msgstr "Форматы файлов"
-
-#. module: ebook
 #: model:ir.actions.act_window,name:ebook.ebook_category_actions
 msgid "eBook category action"
 msgstr "Категории"
@@ -210,3 +362,38 @@ msgstr "Категории"
 #: model_terms:ir.ui.view,arch_db:ebook.ebook_category_tree
 msgid "eBook category list"
 msgstr "Список категорий"
+
+#. module: ebook
+#: model:ir.actions.act_window,name:ebook.ebook_public_tags_actions
+msgid "eBook public tags action"
+msgstr "Теги для сайта"
+
+#. module: ebook
+#: model_terms:ir.ui.view,arch_db:ebook.ebook_public_tags_tree
+msgid "eBook public tags list"
+msgstr "Список публичных тегов для сайта"
+
+#. module: ebook
+#: model:ir.actions.act_window,name:ebook.ebook_tags_actions
+msgid "eBook tags action"
+msgstr "Создание тега"
+
+#. module: ebook
+#: model_terms:ir.ui.view,arch_db:ebook.ebook_tags_tree
+msgid "eBook tags list"
+msgstr "Список тегов"
+
+#. module: ebook
+#: model_terms:ir.ui.view,arch_db:ebook.ebook_book_search_view
+msgid "Books with public access"
+msgstr "Книги с публичным доступом"
+
+#. module: ebook
+#: model_terms:ir.ui.view,arch_db:ebook.s_ebook_public
+msgid "Доступные материалы"
+msgstr ""
+
+#. module: ebook
+#: model_terms:ir.ui.view,arch_db:ebook.s_ebook_public
+msgid "Фильтр"
+msgstr ""

@@ -6,13 +6,10 @@
         <field name="arch" type="xml">
             <tree string="Book list" default_order="name" create='true' edit='true'>
                 <field name="name"/>
-                <field name="isbn"/>
-		<field name="author_ids" widget="many2many_tags"/>
-		<field name="category_ids" widget="many2many_tags"/>
-		<field name="country_id"/>
-                <field name="year"/>
+                <field name="author_ids" widget="many2many_tags"/>
+                <field name="category_ids" widget="many2many_tags"/>
+                <field name="tags_ids" widget="many2many_tags"/>
                 <field name="pages"/>
-		<field name="create_uid"/>
             </tree>
         </field>
     </record>
@@ -21,27 +18,32 @@
         <field name="name">Books kanban view</field>
         <field name="model">ebook.book</field>
         <field name="arch" type="xml">
-            <kanban>
+            <kanban default_order="name">
                 <field name="id"/>
                 <field name="name"/>
                 <field name="image"/>
 		<field name="author_ids"/>
 		<field name="category_ids"/>
+		<field name="tags_ids"/>
+		<field name="short_description"/>
                 <templates>
                     <t t-name="kanban-box">
                         <div t-attf-class="oe_kanban_global_click">
-                            <div class="oe_kanban_details">
+                            <div class="oe_kanban_details m-2">
                                 <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="o_kanban_image">
-                                            <img t-att-src="kanban_image('ebook.book','image',record.id.raw_value)"/>
+                                    <div style="font-weight: bold; font-size: 1.1em;"><field name="name"/></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3 d-flex justify-content-center">
+                                        <div class="o_kanban_image" style="width: auto">
+                                            <img alt="Preview" t-att-src="kanban_image('ebook.book','image',record.id.raw_value)"/>
                                         </div>
                                     </div>
                                     <div class="col-md-9">
-                                        <strong><field name="name"/></strong><br/>
-					<field name="author_ids"/>
-					<hr/>
-					<field name="category_ids"/>
+                                        <field name="short_description"/>
+                                        <field name="author_ids"/>
+                                        <field name="category_ids"/>
+                                        <field name="tags_ids"/>
                                     </div>
                                 </div>
                             </div>
@@ -58,48 +60,55 @@
         <field name="arch" type="xml">
 	    <form string="Book" create="true" edit="true">
                 <style>
-                    .ebook-img img { max-height: 300px; max-width: 200px; }
-		    .o_field_widget.o_field_pdf_viewer .o_pdfview_iframe {
-			width: 100% !important;
-			min-height: 600px;
-			height: auto;
-			border: 0;
-			margin-top: 10px;
-		    }
+                    .ebook-img img { max-height: 600px; max-width: 600px; }
+                    .o_field_widget.o_field_pdf_viewer .o_pdfview_iframe {
+                        width: 100% !important;
+                        min-height: 600px;
+                        height: auto;
+                        border: 0;
+                        margin-top: 10px;
+                    }
                 </style>
                 <header>
                     <button name="get_preview" type="object" string="Create preview" class="oe_highlight"/>
                 </header>
-		<sheet>
+		<!-- sheet -->
 		    <group>
-			<group string="Characteristics">
-			    <field name="image" class="ebook-img" widget="image"/>
+			<group string="Characteristics" style="margin-top: 7px">
 			    <field name="name"/>
 			    <field name="local_name"/>
 			    <field name="original_name"/>
+			    <field name="short_description"/>
 			    <field name="country_id"/>
 			    <field name="year"/>
 			    <field name="pages"/>
 			    <field name="author_ids" widget="many2many_tags"/>
 			    <field name="category_ids" widget="many2many_tags"/>
+			    <field name="tags_ids" widget="many2many_tags"/>
 			    <field name="isbn"/>
+			    <field name="is_public" widget="boolean_toggle"/>
+                <field name="public_tags_ids" widget="many2many_tags" attrs="{'invisible': [['is_public', '=', False]]}"/>
 			</group>
-			<!-- group string="Attachment" col="1" -->
+			<!--group string="Book" col="1" colspan="4" -->
 			<div class="oe_row">
-			    <field name="attachment_id" class="oe_inline" widget="pdf_viewer" nolabel="1"/>
+			    <notebook>
+				<page string="Preview">
+				    <field name="image" class="ebook-img" widget="image" nolabel="1"/>
+				</page>
+			        <page string="Description">
+			            <field name="description" widget="html"/>
+			        </page>
+				<page string="Book">
+				    <field name="attachment_id" class="oe_inline" widget="pdf_viewer" nolabel="1"/>
+				</page>
+			    </notebook>
 			</div>
-			<!-- /group -->
 		    </group>
-		    <notebook>
-			<page string="Description">
-			    <field name="description" widget="html"/>
-			</page>
-		    </notebook>
 		    <div class="oe_chatter">
 			<field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
 			<field name="message_ids" widget="mail_thread"/>
 		    </div>
-		</sheet>
+		<!-- /sheet -->
     	    </form>
 
         </field>
@@ -109,12 +118,17 @@
         <field name="name">eBook book search</field>
         <field name="model">ebook.book</field>
         <field name="arch" type="xml">
+            <filter
+                name="ebook_public"
+                string="Books with public access"
+                domain="[('is_public', '=', True)]"/>
             <search string="Book search">
                 <field name="name"/>
                 <field name="author_ids"/>
                 <field name="isbn"/>
-		<searchpanel>
+		        <searchpanel>
                     <field name="category_ids" icon="fa-folder" select="multi"/>
+                    <field name="tags_ids" icon="fa-tag" select="multi"/>
                 </searchpanel>
             </search>
         </field>

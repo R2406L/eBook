@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="ebook.s_ebook_public.item">
+        <div class="d-flex ebook_item" >
+            <div class="d-flex flex-row w-100">
+                <img class="ebook_item__image" t-attf-src="/ebook/preview/{{item.id}}">
+                <div class="d-flex flex-column ps-2 w-100">
+                    <div class="ebook_item__name"><t t-esc="item.name"/></div>
+                    <div class="ebook_item__description">
+                        <t t-if="item.short_description">
+                            <t t-esc="item.short_description"/>
+                        </t>
+                        <div class="d-flex flex-row flex-wrap">
+                            <t t-foreach="item.tags" t-as="tag">
+                                <div class="ebook_item__tag">
+                                    <t t-esc="tag[1]"/>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                    <div class="d-flex mt-auto"></div>
+                    <div class="d-flex align-items-end ebook_item__actions">
+                        <span class="me-2"><t t-esc="item.downloads"/></span>
+                        <a t-attf-href="/ebook/download/{{item.id}}" target="_blank"><i class="fa fa-download"/></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>
