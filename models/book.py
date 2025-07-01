@@ -19,12 +19,17 @@ class Book(models.Model):
     country_id = fields.Many2one('res.country',string='Country')
     author_ids = fields.Many2many('res.partner',string='Authors')
     category_ids = fields.Many2many('ebook.category',string='Categories')
+    tags_ids = fields.Many2many('ebook.tags',string='Tags')
+    public_tags_ids = fields.Many2many('ebook.public_tags',string='Public tags')
     attachment_id = fields.Binary(string='File')
     image = fields.Binary('Illustration')
+    short_description = fields.Char('Short description',size=128)
     description = fields.Text('Short description')
     pages = fields.Integer('Page count')
     year = fields.Char('Year of publish',size=4)
     isbn = fields.Char('ISBN')
+    is_public = fields.Boolean('Is public access')
+    downloads = fields.Integer('Download count')
 
     @api.depends('local_name','original_name')
     def _get_name(self):
@@ -33,6 +38,9 @@ class Book(models.Model):
                 s.name = "%s (%s)" % (s.local_name,s.original_name)
             else:
                 s.name = s.local_name
+
+    def _backup(self):
+        return [s.browse() for s in self]
 
     def get_preview(self):
         path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))

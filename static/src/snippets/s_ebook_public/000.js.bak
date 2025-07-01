@@ -1,0 +1,55 @@
+/** @odoo-module **/
+
+import publicWidget from 'web.public.widget';
+import { qweb } from 'web.core';
+import { useService } from 'web.core.utils.hooks';
+import { useState } from 'odoo.owl';
+
+    // const config = require('web.config');
+    // const rpc = require('web.rpc');
+
+publicWidget.registry.eBookPublicWidget = publicWidget.Widget.extend({
+    selector: '.s_ebook_public',
+    disabledInEditableMode: false,
+    
+    /**
+     * @override
+     */
+    start: function () {
+        this.orm = useService('orm');
+        this.template = 'ebook.s_ebook_public.item';
+        this.state = useState({
+            status: true
+        });
+        // rpc.query({
+        //     route: '/ebook/public',
+        //     params: {},
+        // }).then(function (result) {
+        //     self.$('#ebook_content').text(result);
+        // });
+        console.log(this)
+        this.$el.find('#content').html(this._render({}));
+        return this._super.apply(this, arguments);
+    },
+
+    /**
+     * @override
+     */
+    destroy: function () {
+        this._super(...arguments);
+        this._render(null);
+    },
+
+    /**
+     * @private
+     */
+    _render: function (res) {
+        let item = $(qweb.render(template, {}));
+    }
+
+});
+
+
+export default {
+    eBookPublic: publicWidget.registry.eBookPublicWidget,
+};

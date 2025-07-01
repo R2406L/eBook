@@ -1,0 +1,17 @@
+
+.ebook_filter {
+
+    &__tag {
+        cursor: pointer;
+        padding: 4px 4px 4px 4px;
+        margin-right: 4px;
+        margin-top: 2px;
+        font-size: 0.9em;
+    }
+
+}
+
+.tag_active {
+    background-color: #114b5f;
+    color: white;
+}

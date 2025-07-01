@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="ebook.s_ebook_public.tag">
+        <div t-attf-class="ebook_filter__tag {{active ? 'tag_active' : ''}}" t-attf-id="{{tag}}">
+            <t t-esc="tag">
+        </div>
+    </t>
+
+</templates>

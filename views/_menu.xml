@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <menuitem id="ebook_menu" name="Library" sequence="1" action="ebook_book_actions" groups="ebook.ebook_user"/>
-	<menuitem id="ebook_book_menu" name="Books" action="ebook_book_actions" parent="ebook_menu" sequence="1" groups="ebook.ebook_user"/>
-	<menuitem id="ebook_settings_menu" name="Settings" parent="ebook_menu" sequence="10" groups="ebook.ebook_user"/>
-	    <menuitem id="ebook_category_menu" name="Categories" action="ebook_category_actions" parent="ebook_settings_menu" sequence="1" groups="ebook.ebook_user"/>
+    <menuitem id="ebook_menu" name="Library" sequence="10" action="ebook_book_actions" groups="ebook.ebook_user"/>
+		<menuitem id="ebook_book_menu" name="Books" action="ebook_book_actions" parent="ebook_menu" sequence="1" groups="ebook.ebook_user"/>
+		<menuitem id="ebook_settings_menu" name="Settings" parent="ebook_menu" sequence="2" groups="ebook.ebook_user"/>
+	    	<menuitem id="ebook_category_menu" name="Categories" action="ebook_category_actions" parent="ebook_settings_menu" sequence="1" groups="ebook.ebook_user"/>
+	    	<menuitem id="ebook_tags_menu" name="Tags" action="ebook_tags_actions" parent="ebook_settings_menu" sequence="2" groups="ebook.ebook_user"/>
+			<menuitem id="ebook_public_tags_menu" name="Public tags" action="ebook_public_tags_actions" parent="ebook_settings_menu" sequence="3" groups="ebook.ebook_user"/>
+		<menuitem id="ebook_management_menu" name="Management" parent="ebook_menu" sequence="3" groups="ebook.ebook_administrator"/>
+			<!-- menuitem id="ebook_management_backup_menu" name="Backup / Restore" action="ebook_management_backup_wizard" parent="ebook_management_menu" sequence="1" groups="ebook.ebook_user"/ -->
 </odoo>
